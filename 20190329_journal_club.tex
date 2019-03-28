@@ -13,7 +13,7 @@
 \usepackage{subfig}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[style=verbose,backend=biber,autocite=footnote]{biblatex}
+\usepackage[style=nature,backend=biber,autocite=footnote]{biblatex}
 \addbibresource{/home/asinha/Documents/01_Readables/00_research_papers/masterbib.bib}
 % Use opensans
 \usepackage[default,osfigures,scale=0.95]{opensans}
@@ -46,10 +46,10 @@
 % how to use multiple references to the same footnote: https://tex.stackexchange.com/questions/27763/beamer-multiple-references-to-the-same-footnote
 
 %% title %%
-\title[test]{test}
-\subtitle{A ready to use Free and Open source platform for neuroscientists}
-\author[Ankur Sinha]{Ankur Sinha @ Fedora}
-\date[7/12/2018]{7/12/2018}
+\title{Investigating the activity dependent dynamics of synaptic structures using biologically realistic modelling of peripheral lesion experiments}
+\subtitle{Discussion of my Ph.D. research}
+\author[Ankur Sinha]{Ankur Sinha}
+\date{29/03/2019}
 
 %% document begins %%
 \begin{document}
@@ -60,212 +60,139 @@
 \end{frame}
 
 %% Three slides for 5 minutes seems good
-\section{Philosophy}
-\begin{frame}[c]{Free software}
-  Users should have the freedom to \alert{share, study, and modify} software\footnotemark.
-  \pause{}
-
-  The \alert{user} is \href{https://www.fsf.org/about/what-is-free-software}{free}.
-
-  \footnotetext[1]{\href{https://u.fsf.org/user-liberation}{Free software foundation}}
-\end{frame}
-\begin{frame}[c]{Free science}
-  \alert{Everyone} should have the freedom to \alert{share, study, and modify} scientific material\footnotemark.
-  \pause{}
-
-  So, scientists, hobbyists, students \ldots\ should all have access to scientific material---irrespective of social status, location, age, nationality \ldots.
-  \footnotetext[2]{\href{http://opensourceforneuroscience.org/}{Open source for neuroscience}}
-\end{frame}
-\section{A platform?}
-\begin{frame}[c]{The developer---user relationship: proprietary software}
+%% So, 30 slides at most for 50 minutes
+\section{Context}
+\begin{frame}[c]{Plasticity while maintaining stability}
   \begin{figure}[h]
-  \begin{center}
-  \begin{tikzpicture}[scale=1, transform shape]
-    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream) = Vendor};
-    \fill[fill=green, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){End users};
-    \draw [red, ultra thick, ->] (6, -1) -- ++(0, 1) node [midway, left] {\$\$} node [midway, right] {\$\$};
-    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {binaries} node [midway, left, text centered] {support} ++(0, -1) ;
-  \end{tikzpicture}
-  \end{center}
+    \includegraphics[width=1.05\linewidth]{99_images/Plasticity.pdf}
   \end{figure}
+  \note[item]{We know there are multiple plasticity mechanisms active all at once. Hebbian plasticity underlies learning, but de-stabilises networks. Homeostatic plasticity ensures that even when learning occurs, the network remains in a stable state}
+  \note[item]{Generally, though, when we speak of these, we refer to synaptic plasticity only. But, lots of evidence now confirms that, in fact, structural plasticity is active in the adult brain. So not only are synaptic weights changing, the connectivity of networks is changing too!}
+  \note[item]{So, it isn't hard to imaging how if changes in synaptic strengths makes plasticity-stability an issue, how the removal and formation of whole synapses would have a much larger effect to plasticity-stability.}
+  \note[item]{For the purpose of our analysis, we do not consider the modulation of synaptic strengths as structural plasticity (even though it is).}
 \end{frame}
-\begin{frame}[c]{The developer---user relationship: free software}
-  \begin{figure}[h]
-  \begin{center}
-  \begin{tikzpicture}[scale=1, transform shape]
-    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream)};
-    \fill[fill=green, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){End users};
-    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {code} node [midway, left, text centered] {support} ++(0, -1) ;
-    \draw [magenta, very thick, ->] (6, -1) -- node [midway, right, text centered] {feedback} ++(0, 1);
-  \end{tikzpicture}
-  \end{center}
-  \end{figure}
+\begin{frame}[c]{Synaptic structures are dynamic in the adult brain}
+  \note[item]{In the adult brain, now that we have the tech to look in at the microscopic structures that form synapses, we see that these are highly dynamic. They sprout and retract, forming and removing synapses. However, this must happen in a way that the brain remains functional: so, are their Hebbian and Homeostatic components of structural plasticity too?}
+  \tiny{
+  \begin{enumerate}
+    \item \fullcite{Chen2011}
+    \item \fullcite{Marik2010}
+    \item \fullcite{Marik2014}
+    \item \fullcite{Stettler2006}
+    \item \fullcite{Gogolla2007}
+    \item \fullcite{Holtmaat2005}
+    \item \fullcite{Chen2012}
+    \item \fullcite{Trachtenberg2002}
+    \item \fullcite{Villa2016}
+  \end{enumerate}
+  }
 \end{frame}
-\begin{frame}[c]{The developer---user relationship: distributions}
-  \begin{figure}[h]
-  \begin{center}
-  \begin{tikzpicture}[scale=1, transform shape]
-    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream)};
-    \fill[fill=cyan, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){Linux distributions: Fedora/Debian \ldots};
-    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {code} node [midway, left, text centered] {support} ++(0, -1) ;
-    \draw [magenta, very thick, ->] (6, -1) -- node [midway, right, text centered] {code} node [midway, left, text centered] {feedback} ++(0, 1) ;
-    \fill[fill=green, text=white, rounded corners] (0, -4) rectangle ++(8, 1) node[pos=0.5] (B){End users};
-    \draw [magenta, very thick, ->] (2, -2) -- node [midway, right, text centered] {binaries} node [midway, left, text centered] {support} ++(0, -1) ;
-    \draw [magenta, very thick, ->] (6, -3) -- node [midway, right, text centered] {feedback} ++(0, 1) ;
-  \end{tikzpicture}
-  \end{center}
-  \end{figure}
+\begin{frame}[c]{Evidence of homeostatic structural plasticity: lesion studies}
+  \note[item]{The simplest way of studying homeostatic mechanism is to nudge the network out of its stable state. Lesion studies have, for a long time, observed structural changes after peripheral lesioning. A peripheral lesion is where you dont destroy the network itself, but you disrupt the input to it---we'll come to this in detail later.}
+  \tiny{
+    \begin{enumerate}
+      \item \fullcite{Wall1984}
+      \item \fullcite{Rasmusson1982}
+      \item \fullcite{Rajan1993}
+      \item \fullcite{Pons1991}
+      \item \fullcite{Allard1991}
+      \item \fullcite{Darian-Smith1994}
+      \item \fullcite{Darian-Smith1995}
+      \item \fullcite{Florence1998}
+      \item \fullcite{Heinen1991}
+    \end{enumerate}
+  }
 \end{frame}
-\begin{frame}[c]{Distributions: package maintainers}
-  \begin{itemize}
-    \item Build software:
+\begin{frame}[c]{Detailed lesion experiments to study synaptic structures}
+  \note[item]{With more tech, neuroscientists have been able to mark, track, and analyse micro-structures that are involved in synapses: boutons, spines, dendritic trees. So, there's recently quite a bit of data from these.}
+  \tiny{
+    \begin{enumerate}
+      \item \fullcite{Chen2011}
+      \item \fullcite{Marik2010}
+      \item \fullcite{Yamahachi2009}
+      \item \fullcite{Hickmott2005}
+      \item \fullcite{Keck2008}
+      \item \fullcite{Keck2011}
+      \item \fullcite{Trachtenberg2002}
+    \end{enumerate}
+  }
+\end{frame}
+\begin{frame}[c]{Experimental protocol I}
+  \note[item]{The protocol is pretty standard. Here, for a study in the visual cortex, the retinal field of a rat or a mouse is mapped.}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{99_images/keck-1-1a}%chktex 8
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{99_images/keck-1-1c}%chktex 8
+    \end{column}
+  \end{columns}
+  \footnotetext[1]{\fullcite{Keck2008}}
+\end{frame}
+\begin{frame}[c]{Experimental protocol II:\ after peripheral lesion}
+  \note[item]{Then, a part of the retina is lesioned. This cuts off inputs to a part of the visual cortex, as shown in the first figure. This forms the Lesion Projection Zone (LPZ). By repeated imaging of the region over months, the reorganisation of the network is tracked.}
+    \includegraphics[width=\textwidth]{99_images/keck-1-2c}%chktex 8
+    \footnotetext[1]{\fullcite{Keck2008}}
+\end{frame}
+\begin{frame}[c]{What we know from these experiments}
+  \note[item]{So, if this a simple schematic, of the regions around the LPZ, this is what we know from these studies.}
+  \begin{columns}
+    \begin{column}{0.3\textwidth}
+      \centering
+      \input{99_images/regions.tex}
+    \end{column}
+    \pause{}
+    \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item including all \alert{dependencies}.
+        \item Massive disinhibition in the LPZ\@.
+        \item Ingrowth of excitatory synapses from the peri-LPZ to the LPZ\@.
+        \item Outgrowth of inhibitory synapses from the LPZ to the peri-LPZ\@.
       \end{itemize}
-      \pause{}
-    \item Check for \alert{correctness} (!).
-      \pause{}
-    \item \alert{Keep up} with upstream: updates, security fixes \ldots.
-      \pause{}
-    \item \alert{Connect} upstream to users.
-      \pause{}
-    \item \alert{Enable} upstream to improve their software\footnotemark{}.
-  \end{itemize}
-  \footnotetext[3]{\href{https://fedoraproject.org/wiki/Staying_close_to_upstream_projects}{Fedora project: staying close to upstream.}}
+    \end{column}
+  \end{columns}
 \end{frame}
-\section{NeuroFedora}
-\begin{frame}[c]{Goals}
-  \begin{itemize}
-    \item Enable \alert{free science}:
-      \pause{}
+\begin{frame}[c]{Computational modelling:\ MSP I}
+  \note[item]{Computational modelling stems from evidence from decades years ago. It was established that outgrowth depends on the change in the Calcium concentration in neurons.}
+  \note[item]{So, in this figure, we see that a neurotransmitter causes a change in the Calcium of the neuron, and that causes some change in its outgrowth.}
+  \note[item]{What this suggests, is that there's an optimal level of Calcium for neurons to have \enquote{normal} growth.}
+  \note[item]{Based on this, Butz and van Ooyen came up with a framework for modelling structural plasticity. In this, they modelled the rate of change of synaptic elements as a Gaussian function of the neuron's Calcium concentration.}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{99_images/lipton1989.png}%chktex 8
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{99_images/growth-curve-general.png}%chktex 8
+    \end{column}
+  \end{columns}
+  \footnotetext[2]{\fullcite{Lipton1989}}
+  \footnotetext[3]{\fullcite{Butz2013}}
+\end{frame}
+\begin{frame}[c]{Computational modelling:\ MSP II}
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item researchers (end-users):
-          \begin{itemize}
-            \item ready to use \alert{tested} tools.
-          \end{itemize}
-          \pause{}
-        \item upstreams:
-          \begin{itemize}
-            \item feedback from users.
-            \item software improvements.
-            \item implement standards.
-          \end{itemize}
+        \item Synaptic structures (\(z\)): excitatory \alert{and} inhibitory post-synaptic, excitatory \alert{or} inhibitory pre-synaptic elements.
+        \item New synapses form when \alert{free} plugs are available: (\(z > z_{conn}\))
+        \item Synapses are deleted if: (\(z < z_{conn}\))
       \end{itemize}
-      \pause{}
-    \item Help make science \alert{\enquote{default to open}}.
-  \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{99_images/growth-curve-general.png}%chktex 8
+    \end{column}
+  \end{columns}
 \end{frame}
-\begin{frame}[c]{NeuroFedora example I\@: NEST (\(\bigstar\bigstar\bigstar\bigstar\bigstar\))}
-  \begin{itemize}
-    \item Build requires\footnotemark:
-      \begin{itemize}
-        \item \alert{Compulsory:} Python+, Cython, GSL, Ncurses, CMake, GCC\@.
-          \pause{}
-        \item \alert{Optional:} libneurosim (for PyNN), MUSIC, MPICH, OpenMPI\@.
-      \end{itemize}
-  \end{itemize}
-  \footnotetext[4]{\href{https://src.fedoraproject.org/rpms/nest/blob/master/f/nest.spec}{Fedora project: nest SPEC file.}}
+\begin{frame}[c]{Computational modelling II}
+  \centering
+  \includegraphics[width=0.7\textwidth]{99_images/butz3.png}
+  \footnotetext[2]{\fullcite{Butz2013}}
 \end{frame}
-\begin{frame}[c]{NeuroFedora Example I\@: NEST\@: usage}
-  \texttt{\$ sudo dnf install python3-nest}\\
-  \texttt{\$ sudo dnf install python3-nest-mpich}\\
-  \texttt{\$ sudo dnf install python3-nest-openmpi}
-\end{frame}
-\begin{frame}[c]{NeuroFedora example II\@: PyNN (\(\bigstar\bigstar\bigstar\))}
-  \begin{itemize}
-    \item Build requires\footnotemark:
-      \pause{}
-      \begin{itemize}
-        \item \alert{Compulsory:} Python+, Ncurses, CMake, GCC\@.
-        \item \alert{At least one of:} NEST, Brian, NEURON\@.
-      \end{itemize}
-  \end{itemize}
-  \footnotetext[5]{\href{https://github.com/sanjayankur31/rpm-specs/blob/python-pynn/python-PyNN.spec}{Fedora project: PyNN SPEC file (WIP).}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora Example II\@: PyNN (WIP): usage}
-  \texttt{\$ sudo dnf install python3-PyNN}
 
-  Installs PyNN and NEST, Brian\footnotemark{}, NineML (and NEURON\footnotemark{}).
-
-  \pause{}
-  \texttt{\$ sudo dnf install python3-PyNN-nest}
-
-  Installs PyNN and NEST\@.
-  \footnotetext[6]{Requires Brian v1}
-  \footnotetext[7]{\href{https://github.com/neuronsimulator/nrn/issues/113}{WIP: Requires upstream improvements.}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: package metrics}
-  \begin{itemize}
-    \item 67 packages available in total\footnotemark.
-    \item \textasciitilde{}130 in queue\footnotemark.
-  \end{itemize}
-  \footnotetext[8]{\href{https://src.fedoraproject.org/group/neuro-sig}{src.fedoraproject.org: Neuro-SIG}}
-  \footnotetext[9]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?status=Open}{Pagure.io: Neuro-SIG: issues}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: computational neuroscience}
-  \begin{itemize}
-    \item Available: NEST, NineML, moose, Brian2, PyLEMS\@.
-    \item In queue (26)\footnotemark: NEURON, PyNN, Brian1, NetPyne, Genesis, NeuroMLlite, pyNeuroML, pype9, HNN, libSBML \ldots
-  \end{itemize}
-  \footnotetext[10]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Computational+neuroscience}{Neuro-SIG: computational neuroscience}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: neuroimaging}
-  \begin{itemize}
-    \item Available: biosig, dcm2niix, gifticlib, InsightToolKit, libminc, dipy, fsleyes, mne-bids, pydicom \ldots
-    \item In queue (40)\footnotemark: Nistats, FEAT, TranctoR, FSL, SPM, connectomeviewer, nipype, itktools \ldots
-  \end{itemize}
-  \footnotetext[11]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?status=Open&tags=F\%3A+Neuroimaging&priority=0}{Neuro-SIG: neuroimaging}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: data analysis}
-  \begin{itemize}
-    \item Available: nilearn, scikit-learn, klusta, lazyarray, neo, nitime, patsy \ldots
-    \item In queue (25)\footnotemark: spyke-viewer, stimfit, pyelectro, pyspike, pymc3 \ldots
-  \end{itemize}
-  \footnotetext[12]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Data+Analysis}{Neuro-SIG: data analysis}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: utilities}
-  \begin{itemize}
-    \item Available: texlive (full), duecredit, chaospy, \ldots
-    \item In queue (37)\footnotemark: spiking-circus, pingouin, spykeutils, PsychToolbox, tridesclous, uncertainpy, neuroshare, Btmorph \ldots
-  \end{itemize}
-  \footnotetext[13]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Utilities}{Neuro-SIG: utilities}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: plans}
-  \begin{itemize}
-    \item Continue package imports.
-      \pause{}
-    \item Update documentation\footnotemark.
-      \pause{}
-    \item Docker images\footnotemark!
-      \pause{}
-    \item Announce to research community.
-      \pause{}
-    \item RHEL/CentOS/Scientific Linux support (our cluster runs Scientific Linux).
-      \pause{}
-    \item BoFs/Hack sessions at scientific conferences (workshop at CNS 2019?)
-  \end{itemize}
-  \footnotetext[14]{\href{https://pagure.io/neuro-sig/documentation}{Pagure.io: Neuro-SIG: Documentation}}
-  \footnotetext[15]{\href{https://registry.fedoraproject.org/}{registry.fedoraproject.org}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora: requirements}
-  \begin{itemize}
-    \item More package maintainers\footnotemark.
-      \pause{}
-    \item Testers---end users who are happy to test packages and provide feedback (QA)\footnotemark.
-      \pause{}
-    \item Documentation writers/proofreaders.
-  \end{itemize}
-  \footnotetext[16]{\href{https://fedoraproject.org/wiki/Join_the_package_collection_maintainers}{Fedora: Join the package maintainers}}
-  \footnotetext[17]{\href{https://fedoraproject.org/wiki/QA:Updates_Testing}{Fedora QA: testing updates}}
-\end{frame}
-\begin{frame}[c]{NeuroFedora}
-  \begin{center}
-    https://fedoraproject.org/wiki/SIGs/NeuroFedora\vspace{0.2cm}
-
-    \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons Attribution-ShareAlike 4.0 International License}.\vspace{0.2cm}
-
-    \ccbysa{}
-  \end{center}
-\end{frame}
+\section{Methods}
+\section{Results and discussion}
 \end{document}
 

@@ -1,8 +1,7 @@
-.PHONY: all pdf presentation_notes notes_only handouts handouts_print handouts_space clean
+.PHONY: pdf
 
 #all: pdf with_notes notes_only notes_only_print handouts handouts_print clean
 #all: pdf with_notes handouts handouts_print handouts_space clean
-all: pdf with_notes handouts_space notes_only_print notes_only clean
 
 pdf: 20190329_journal_club.tex
 	latexmk -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make 20190329_journal_club_presentation.tex
