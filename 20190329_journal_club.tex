@@ -2,247 +2,270 @@
 
 %% packages %%
 % support for coloured text
-\usepackage{color}  
-
+\usepackage{color}
 % IPA
 \usepackage{tipa}
+\usepackage[scale=2]{ccicons}
+\usepackage{amssymb}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta, arrows}
 \usepackage{jneurosci}
-\usepackage{subfig}  
-
-% Get rid of warnings
+\usepackage{subfig}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[style=verbose,backend=biber,autocite=footnote]{biblatex}
+\addbibresource{/home/asinha/Documents/01_Readables/00_research_papers/masterbib.bib}
+% Use opensans
 \usepackage[default,osfigures,scale=0.95]{opensans}
-%\usepackage{lmodern}
-
 % for strike through
 \usepackage[normalem]{ulem}
-
 % links, urls, refs
 \definecolor{links}{HTML}{2A1B81}
+% Fedora blue for the theme
+\definecolor{FedoraBlue}{HTML}{2A1B81}
 \usepackage{hyperref}
 \hypersetup{colorlinks,linkcolor=Green,urlcolor=links}
-
 % graphics
 \usepackage{graphicx}
-
 % algorithm
 \usepackage{algorithmic}
-
 \usepackage{textcomp}
-
 \usepackage{wrapfig}
+\usepackage{textgreek}
+\usepackage{euler}
 
-%\usepackage[round]{natbib}
 % beamer theme
 % use defaults for theme
-\usetheme{Montpellier}
-\usecolortheme[RGB={41,114,65}]{structure}
-\logo{\includegraphics[keepaspectratio,scale=0.25,angle=0]{herts-logo-225x52.jpg}}
-
+\usetheme[numbering=fraction]{metropolis}
+\usefonttheme[onlymath]{serif}
+\setbeamerfont{footnote}{size=\tiny}
 \setbeamerfont{caption}{size=\tiny}
 \setbeamercolor{alerted text}{fg=Green}
 
+% Not needed in metropolis, but in general footnote citation fixes: https://tex.stackexchange.com/questions/44217/how-can-i-stop-footcite-from-hijacking-my-beamer-columns
+% how to use multiple references to the same footnote: https://tex.stackexchange.com/questions/27763/beamer-multiple-references-to-the-same-footnote
+
 %% title %%
-\title[Cortical rewiring]{Loss of sensory input causes rapid structural changes of inhibitory neurons in adult mouse visual cortex}
-\subtitle{- UH Biocomputation group journal club -}
-\author[Ankur Sinha]{Ankur Sinha}
-\institute[UH Biocomputation]{University of Hertfordshire - Biocomputation group}
-\date[29/03/2019]{29 March 2019}
+\title[test]{test}
+\subtitle{A ready to use Free and Open source platform for neuroscientists}
+\author[Ankur Sinha]{Ankur Sinha @ Fedora}
+\date[7/12/2018]{7/12/2018}
 
 %% document begins %%
 \begin{document}
 
-%% title frame %%
+% title frame %%
 \begin{frame}
-  \titlepage
+  \titlepage{}
 \end{frame}
 
-\begin{frame}{Outline}
-  \small{\tableofcontents}
-\end{frame}
-\section{Context}
-\begin{frame}{I'm looking at:}
-  the \alert{functional effects} of cortical rewiring following loss of input.
-\end{frame}
-\begin{frame}{Plasticity - refresher}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=\textwidth]{99_images/Plasticity}
-  \end{figure}
-\end{frame}
-\section{Biology}
-\begin{frame}{Three papers}
-  \begin{itemize}
-    \item \href{http://www.nature.com/neuro/journal/v11/n10/abs/nn.2181.html}{Massive restructuring of neuronal circuits during functional reorganisation of adult visual cortex}~\cite{Keck.517}
-      \pause
-    \item \href{http://www.sciencedirect.com/science/article/pii/S0896627311005642}{Loss of sensory input causes rapid structural changes of inhibitory neurons in adult mouse visual cortex}~\cite{Keck2011869}.
-      \pause
-    \item \href{http://www.sciencedirect.com/science/article/pii/S0959438815001312}{Adult plasticity and cortical reorganisation after peripheral lesions}~\cite{Sammons2015136}.
-    \note[item]{This is a short review paper that summaries the two above}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Model}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.7\textwidth]{99_images/model-schematic}
-    \caption{Model schematic}
-  \end{figure}
-\end{frame}
-\begin{frame}{General observations}
-  \begin{itemize}
-    \item Peripheral lesion - retinal, for example
-    \item Observe the cortex over time
-    \note[item]{Depends on what one is looking at, different techniques are used. Could be electrophysiological studies, or imaging}
-    \note[item]{Keck et al. use a cranial window technique. There's also a thinning skull technique. Both of which I do not know much about}
-    \note[item]{Various species, various cortices, but a lot of work has been done on the visual cortex}
-    \begin{itemize}
-      \item receive feed-forward input from the lesioned peripheral area
-    \end{itemize}
-    \pause
-  \item \alert{Loss of input} is observed initially after the lesion
-    \pause
-  \item Gradually, \alert{remapping} occurs, with activity returning to pre-lesion levels
-  \note[item]{Several weeks and months}
-    \begin{itemize}
-      \item \alert{Receptive fields} of deprived neurons \alert{become similar to} receptive fields of cells that are spatially adjacent in the spared cortical regions
-      \item \alert{Intra-cortical plasticity}, as little or no reorganisation has been observed in the LGN
-      \note[item]{Michael had asked me this at last week's meeting}
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Mapping}
-  \begin{columns}[c]
-    \begin{column}{0.4\textwidth}
-      \begin{figure}
-        \includegraphics[keepaspectratio,width=\textwidth]{99_images/keck-1-1a}
-        \caption{Drifting grating stimuli}
-      \end{figure}
-    \end{column}
-    \pause
-    \begin{column}{0.4\textwidth}
-      \begin{figure}
-        \includegraphics[keepaspectratio,width=\textwidth]{99_images/keck-1-1c}
-        \caption{Pre lesion mapping}
-      \end{figure}
-    \end{column}
-  \end{columns}
-\end{frame}
-\section{Paper 1 - layer 5 pyramidal neurons}
-\begin{frame}{Recovery - remapping}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.7\textwidth]{99_images/keck-1-2a}
-    \caption{Time lapse for a particular mouse - days 0, 11, 74}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.7\textwidth]{99_images/keck-1-2c}
-    \caption{Time lapse for a particular mouse - days 7, 12, 17}
-  \end{figure}
-\end{frame}
-\begin{frame}{Results summary}
-  \begin{itemize}
-    \item Marked increases in turnover of of dendritic spines during functional reorganisation.
-    \note[item]{Turnover - number of new and lost spines divided by twice the total number of spines}
-    \item Almost complete replacement of set of spines on apical dendrites (91\% vs 38\% in control mice)
-      \pause
-    \item Turnover was as a result of an equal amount of spine loss and gain (evidenced by stable spine density) 
-    \item Spine dynamics remained elevated for the first month, and returned to baseline levels after 2 months.
-  \end{itemize}
-\end{frame}
-\begin{frame}{Results summary}
-  \begin{itemize}
-    \item Peri-LPZ, turnover was slightly elevated w.r.t. controls, but significantly lower than LPZ centre.
-    \item Spine survival but not addition rates for peri-LPZ cells were lower than centre, thus, reorganisation progresses fastest in the centre.
-      \pause
-    \item No correlation between spine turnover and cortical depth.
-    \item No change in dendritic architecture
-  \end{itemize}
-\end{frame}
-\section{Paper 2 - inhibitory neurons}
-\begin{frame}{Study}
-  \begin{itemize}
-    \item Dendrites on inhibitory neurons are typically smooth - dendritic spines conventionally believed to be absent
-    \item A subset of inhibitory neurons have dendritic spines with excitatory synapses - which is what they study
-      \pause
-    \note[item]{It is well established that nearly all dendritic spines of excitatory neurons receive synaptic inputs}
-    \item Confirmed that the majority of spines on the dendrites of inhibitory neurons carry synapses, and that most of these are from excitatory but not inhibitory, presynaptic neurons
-    \item Also confirmed that dendritic spines of inhibitory neurons carry functional glutamatergic (excitatory) receptors.
-    \note[item]{Using immunostaining}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Results - summary}
-  \begin{itemize}
-    \item Similar to excitatory neurons, in control animals, the inhibitory neurons show a stable spine density, and axonal bouton density over time.
-      \pause
-    \item Following lesions, a long lasting loss of excitatory spines on inhibitory neurons, and axonal boutons is observed in the LPZ.
-    \begin{itemize}
-        \item Initial rapid spine and bouton loss and no recovery of density 1 and 2 months after retinal lesion.
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Results - summary}
-  \begin{itemize}
-    \item Even inhibitory neurons whose cell body and dendrites were located outside the LPZ showed substantial decrease in spine and bouton density.
-    \begin{itemize}
-        \item For both, correlation between density and distance of cell body from border of LPZ
-        \item Cells nearer to LPZ had similar densities, away from LPZ had densities similar to control animals
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Justification}
-  \begin{itemize}
-    \item changes reflect competition between lost and preserved visual inputs in the LPZ during functional reorganisation
-      \pause
-    \item simply reflect the overall reduction in cortical activity
-      \pause
-    \item can be distinguished by observing dynamics after \alert{complete} input removal
-      \pause
-    \item For excitatory neurons, structural dynamics of \alert{spines} increased after \alert{complete} input removal, but to a much lesser extent than during reorganisation following focal retinal lesions
-    \begin{itemize}
-      \item So, not simply due to reduction in activity, but also because of competition between deprived and non-deprived inputs.
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Justification}
-  \begin{itemize}
-    \item For both spines and boutons, density and survival fraction decreased to same degree after \alert{complete} input removal
-    \begin{itemize}
-      \item Suggesting that changes in density are largely driven by decrease in cortical activity
-    \end{itemize}
-  \end{itemize}
-\end{frame}
-\begin{frame}{Take away}
-  \begin{itemize}
-    \item Because the changes in inhibitory structures precede increases in excitatory spine turnover, these data suggest that inhibitory structural plasticity may be the first step in the cortical reorganisation after sensory deprivation
-  \end{itemize}
-\end{frame}
-\section{My work - modelling}
-\begin{frame}{Model}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.7\textwidth]{99_images/model-schematic}
-    \caption{Model schematic}
-  \end{figure}
-\end{frame}
-\begin{frame}{Without repair - firing rates}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.8\textwidth]{99_images/201704272210-firing-rate-I-E-zoomed}
-    \caption{Firing rates after lesion, without structural plasticity repair}
-  \end{figure}
-\end{frame}
-\begin{frame}{Without repair - conductances}
-  \begin{figure}
-    \includegraphics[keepaspectratio,width=0.8\textwidth]{99_images/201704272210-all-conductances}
-    \caption{Conductances, without structural plasticity repair (negative conductance implies inhibitory)}
-  \end{figure}
-\end{frame}
+%% Three slides for 5 minutes seems good
+\section{Philosophy}
+\begin{frame}[c]{Free software}
+  Users should have the freedom to \alert{share, study, and modify} software\footnotemark.
+  \pause{}
 
-\section*{References}
-{\tiny
-\begin{frame}[allowframebreaks]{References}
-  \bibliographystyle{jneurosci}
-  \bibliography{biblist}
+  The \alert{user} is \href{https://www.fsf.org/about/what-is-free-software}{free}.
+
+  \footnotetext[1]{\href{https://u.fsf.org/user-liberation}{Free software foundation}}
 \end{frame}
-}
-\begin{frame}
+\begin{frame}[c]{Free science}
+  \alert{Everyone} should have the freedom to \alert{share, study, and modify} scientific material\footnotemark.
+  \pause{}
+
+  So, scientists, hobbyists, students \ldots\ should all have access to scientific material---irrespective of social status, location, age, nationality \ldots.
+  \footnotetext[2]{\href{http://opensourceforneuroscience.org/}{Open source for neuroscience}}
+\end{frame}
+\section{A platform?}
+\begin{frame}[c]{The developer---user relationship: proprietary software}
+  \begin{figure}[h]
   \begin{center}
-    \LARGE{Fin.}
+  \begin{tikzpicture}[scale=1, transform shape]
+    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream) = Vendor};
+    \fill[fill=green, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){End users};
+    \draw [red, ultra thick, ->] (6, -1) -- ++(0, 1) node [midway, left] {\$\$} node [midway, right] {\$\$};
+    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {binaries} node [midway, left, text centered] {support} ++(0, -1) ;
+  \end{tikzpicture}
+  \end{center}
+  \end{figure}
+\end{frame}
+\begin{frame}[c]{The developer---user relationship: free software}
+  \begin{figure}[h]
+  \begin{center}
+  \begin{tikzpicture}[scale=1, transform shape]
+    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream)};
+    \fill[fill=green, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){End users};
+    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {code} node [midway, left, text centered] {support} ++(0, -1) ;
+    \draw [magenta, very thick, ->] (6, -1) -- node [midway, right, text centered] {feedback} ++(0, 1);
+  \end{tikzpicture}
+  \end{center}
+  \end{figure}
+\end{frame}
+\begin{frame}[c]{The developer---user relationship: distributions}
+  \begin{figure}[h]
+  \begin{center}
+  \begin{tikzpicture}[scale=1, transform shape]
+    \fill[fill=blue, text=white, rounded corners] (0, 0) rectangle ++(8, 1) node[pos=0.5] (A){Developer (upstream)};
+    \fill[fill=cyan, text=white, rounded corners] (0, -2) rectangle ++(8, 1) node[pos=0.5] (B){Linux distributions: Fedora/Debian \ldots};
+    \draw [magenta, very thick, ->] (2, 0) -- node [midway, right, text centered] {code} node [midway, left, text centered] {support} ++(0, -1) ;
+    \draw [magenta, very thick, ->] (6, -1) -- node [midway, right, text centered] {code} node [midway, left, text centered] {feedback} ++(0, 1) ;
+    \fill[fill=green, text=white, rounded corners] (0, -4) rectangle ++(8, 1) node[pos=0.5] (B){End users};
+    \draw [magenta, very thick, ->] (2, -2) -- node [midway, right, text centered] {binaries} node [midway, left, text centered] {support} ++(0, -1) ;
+    \draw [magenta, very thick, ->] (6, -3) -- node [midway, right, text centered] {feedback} ++(0, 1) ;
+  \end{tikzpicture}
+  \end{center}
+  \end{figure}
+\end{frame}
+\begin{frame}[c]{Distributions: package maintainers}
+  \begin{itemize}
+    \item Build software:
+      \begin{itemize}
+        \item including all \alert{dependencies}.
+      \end{itemize}
+      \pause{}
+    \item Check for \alert{correctness} (!).
+      \pause{}
+    \item \alert{Keep up} with upstream: updates, security fixes \ldots.
+      \pause{}
+    \item \alert{Connect} upstream to users.
+      \pause{}
+    \item \alert{Enable} upstream to improve their software\footnotemark{}.
+  \end{itemize}
+  \footnotetext[3]{\href{https://fedoraproject.org/wiki/Staying_close_to_upstream_projects}{Fedora project: staying close to upstream.}}
+\end{frame}
+\section{NeuroFedora}
+\begin{frame}[c]{Goals}
+  \begin{itemize}
+    \item Enable \alert{free science}:
+      \pause{}
+      \begin{itemize}
+        \item researchers (end-users):
+          \begin{itemize}
+            \item ready to use \alert{tested} tools.
+          \end{itemize}
+          \pause{}
+        \item upstreams:
+          \begin{itemize}
+            \item feedback from users.
+            \item software improvements.
+            \item implement standards.
+          \end{itemize}
+      \end{itemize}
+      \pause{}
+    \item Help make science \alert{\enquote{default to open}}.
+  \end{itemize}
+\end{frame}
+\begin{frame}[c]{NeuroFedora example I\@: NEST (\(\bigstar\bigstar\bigstar\bigstar\bigstar\))}
+  \begin{itemize}
+    \item Build requires\footnotemark:
+      \begin{itemize}
+        \item \alert{Compulsory:} Python+, Cython, GSL, Ncurses, CMake, GCC\@.
+          \pause{}
+        \item \alert{Optional:} libneurosim (for PyNN), MUSIC, MPICH, OpenMPI\@.
+      \end{itemize}
+  \end{itemize}
+  \footnotetext[4]{\href{https://src.fedoraproject.org/rpms/nest/blob/master/f/nest.spec}{Fedora project: nest SPEC file.}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora Example I\@: NEST\@: usage}
+  \texttt{\$ sudo dnf install python3-nest}\\
+  \texttt{\$ sudo dnf install python3-nest-mpich}\\
+  \texttt{\$ sudo dnf install python3-nest-openmpi}
+\end{frame}
+\begin{frame}[c]{NeuroFedora example II\@: PyNN (\(\bigstar\bigstar\bigstar\))}
+  \begin{itemize}
+    \item Build requires\footnotemark:
+      \pause{}
+      \begin{itemize}
+        \item \alert{Compulsory:} Python+, Ncurses, CMake, GCC\@.
+        \item \alert{At least one of:} NEST, Brian, NEURON\@.
+      \end{itemize}
+  \end{itemize}
+  \footnotetext[5]{\href{https://github.com/sanjayankur31/rpm-specs/blob/python-pynn/python-PyNN.spec}{Fedora project: PyNN SPEC file (WIP).}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora Example II\@: PyNN (WIP): usage}
+  \texttt{\$ sudo dnf install python3-PyNN}
+
+  Installs PyNN and NEST, Brian\footnotemark{}, NineML (and NEURON\footnotemark{}).
+
+  \pause{}
+  \texttt{\$ sudo dnf install python3-PyNN-nest}
+
+  Installs PyNN and NEST\@.
+  \footnotetext[6]{Requires Brian v1}
+  \footnotetext[7]{\href{https://github.com/neuronsimulator/nrn/issues/113}{WIP: Requires upstream improvements.}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: package metrics}
+  \begin{itemize}
+    \item 67 packages available in total\footnotemark.
+    \item \textasciitilde{}130 in queue\footnotemark.
+  \end{itemize}
+  \footnotetext[8]{\href{https://src.fedoraproject.org/group/neuro-sig}{src.fedoraproject.org: Neuro-SIG}}
+  \footnotetext[9]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?status=Open}{Pagure.io: Neuro-SIG: issues}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: computational neuroscience}
+  \begin{itemize}
+    \item Available: NEST, NineML, moose, Brian2, PyLEMS\@.
+    \item In queue (26)\footnotemark: NEURON, PyNN, Brian1, NetPyne, Genesis, NeuroMLlite, pyNeuroML, pype9, HNN, libSBML \ldots
+  \end{itemize}
+  \footnotetext[10]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Computational+neuroscience}{Neuro-SIG: computational neuroscience}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: neuroimaging}
+  \begin{itemize}
+    \item Available: biosig, dcm2niix, gifticlib, InsightToolKit, libminc, dipy, fsleyes, mne-bids, pydicom \ldots
+    \item In queue (40)\footnotemark: Nistats, FEAT, TranctoR, FSL, SPM, connectomeviewer, nipype, itktools \ldots
+  \end{itemize}
+  \footnotetext[11]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?status=Open&tags=F\%3A+Neuroimaging&priority=0}{Neuro-SIG: neuroimaging}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: data analysis}
+  \begin{itemize}
+    \item Available: nilearn, scikit-learn, klusta, lazyarray, neo, nitime, patsy \ldots
+    \item In queue (25)\footnotemark: spyke-viewer, stimfit, pyelectro, pyspike, pymc3 \ldots
+  \end{itemize}
+  \footnotetext[12]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Data+Analysis}{Neuro-SIG: data analysis}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: utilities}
+  \begin{itemize}
+    \item Available: texlive (full), duecredit, chaospy, \ldots
+    \item In queue (37)\footnotemark: spiking-circus, pingouin, spykeutils, PsychToolbox, tridesclous, uncertainpy, neuroshare, Btmorph \ldots
+  \end{itemize}
+  \footnotetext[13]{\href{https://pagure.io/neuro-sig/NeuroFedora/issues?tags=F\%3A+Utilities}{Neuro-SIG: utilities}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: plans}
+  \begin{itemize}
+    \item Continue package imports.
+      \pause{}
+    \item Update documentation\footnotemark.
+      \pause{}
+    \item Docker images\footnotemark!
+      \pause{}
+    \item Announce to research community.
+      \pause{}
+    \item RHEL/CentOS/Scientific Linux support (our cluster runs Scientific Linux).
+      \pause{}
+    \item BoFs/Hack sessions at scientific conferences (workshop at CNS 2019?)
+  \end{itemize}
+  \footnotetext[14]{\href{https://pagure.io/neuro-sig/documentation}{Pagure.io: Neuro-SIG: Documentation}}
+  \footnotetext[15]{\href{https://registry.fedoraproject.org/}{registry.fedoraproject.org}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora: requirements}
+  \begin{itemize}
+    \item More package maintainers\footnotemark.
+      \pause{}
+    \item Testers---end users who are happy to test packages and provide feedback (QA)\footnotemark.
+      \pause{}
+    \item Documentation writers/proofreaders.
+  \end{itemize}
+  \footnotetext[16]{\href{https://fedoraproject.org/wiki/Join_the_package_collection_maintainers}{Fedora: Join the package maintainers}}
+  \footnotetext[17]{\href{https://fedoraproject.org/wiki/QA:Updates_Testing}{Fedora QA: testing updates}}
+\end{frame}
+\begin{frame}[c]{NeuroFedora}
+  \begin{center}
+    https://fedoraproject.org/wiki/SIGs/NeuroFedora\vspace{0.2cm}
+
+    \href{http://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons Attribution-ShareAlike 4.0 International License}.\vspace{0.2cm}
+
+    \ccbysa{}
   \end{center}
 \end{frame}
 \end{document}
+
