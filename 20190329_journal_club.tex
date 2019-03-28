@@ -45,6 +45,7 @@
 \setbeamerfont{footnote}{size=\tiny}
 \setbeamerfont{caption}{size=\tiny}
 \setbeamercolor{alerted text}{fg=Green}
+\setbeamerfont{note page}{size=\small}
 
 % Not needed in metropolis, but in general footnote citation fixes: https://tex.stackexchange.com/questions/44217/how-can-i-stop-footcite-from-hijacking-my-beamer-columns
 % how to use multiple references to the same footnote: https://tex.stackexchange.com/questions/27763/beamer-multiple-references-to-the-same-footnote
@@ -251,5 +252,23 @@
   \note[item]{Explain the simulation protocol.}
 \end{frame}
 \section{Results and discussion}
+\begin{frame}[c]{Deafferentation and successful repair}
+  \begin{figure}
+      \centering
+      \resizebox{\textwidth}{!}{\input{99_images/201811221433-firing-rate-snapshots-E}}%
+  \end{figure}
+\end{frame}
+\begin{frame}[c]{Deafferentation and repair:\ LPZ}
+  \begin{figure}
+      \centering
+      \resizebox{\textwidth}{!}{\input{99_images/201811221433-mean-firing-rates-lpz_c_I-E-zoomed}}%
+  \end{figure}
+\end{frame}
+\begin{frame}[c]{Deafferentation and repair:\ outside the LPZ}
+  \begin{figure}
+      \centering
+      \resizebox{\textwidth}{!}{\input{99_images/201811221433-mean-firing-rates-p_lpz_I-E-zoomed}}%
+  \end{figure}
+\end{frame}
 \end{document}
 
