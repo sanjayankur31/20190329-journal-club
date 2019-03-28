@@ -9,6 +9,10 @@
 \usepackage{amssymb}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, arrows}
+\usepackage{pgfplots}
+\pgfmathdeclarefunction{gaussnew}{4}{%nu, eta, eps, omega
+  \pgfmathparse{(#1*((2*exp(-(((x-((#2+#3)/2))/((#2-#3)/(2*sqrt(-ln(#4/2)))))^2))) -#4))}%chktex 36
+}
 \usepackage{jneurosci}
 \usepackage{subfig}
 \usepackage[T1]{fontenc}
@@ -133,6 +137,7 @@
 \end{frame}
 \begin{frame}[c]{Experimental protocol II:\ after peripheral lesion}
   \note[item]{Then, a part of the retina is lesioned. This cuts off inputs to a part of the visual cortex, as shown in the first figure. This forms the Lesion Projection Zone (LPZ). By repeated imaging of the region over months, the reorganisation of the network is tracked.}
+  \note[item]{Other lesion studies use similar methods: digit removal, whisker trimming, and so on---anything that cuts off projecting activity on to a set of neurons.}
     \includegraphics[width=\textwidth]{99_images/keck-1-2c}%chktex 8
     \footnotetext[1]{\fullcite{Keck2008}}
 \end{frame}
@@ -147,13 +152,17 @@
     \begin{column}{0.6\textwidth}
       \begin{itemize}
         \item Massive disinhibition in the LPZ\@.
-        \item Ingrowth of excitatory synapses from the peri-LPZ to the LPZ\@.
-        \item Outgrowth of inhibitory synapses from the LPZ to the peri-LPZ\@.
+          \note[item]{To permit a window for structural re-organisation.}
+        \item Gradual ingrowth of excitatory synapses from the peri-LPZ to the LPZ\@.
+          \note[item]{To make up for lost excitation.}
+        \item Gradual outgrowth of inhibitory synapses from the LPZ to the peri-LPZ\@.
+          \note[item]{To make up for lost inhibition.}
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
-\begin{frame}[c]{Computational modelling:\ MSP I}
+\begin{frame}[c]{Computational modelling:\ MSP:\ growth curve}
+  \note[item]{In the paper, we simply cite this bit and discuss it briefly, but here I'll explain it in more detail here.}
   \note[item]{Computational modelling stems from evidence from decades years ago. It was established that outgrowth depends on the change in the Calcium concentration in neurons.}
   \note[item]{So, in this figure, we see that a neurotransmitter causes a change in the Calcium of the neuron, and that causes some change in its outgrowth.}
   \note[item]{What this suggests, is that there's an optimal level of Calcium for neurons to have \enquote{normal} growth.}
@@ -171,7 +180,10 @@
   \footnotetext[2]{\fullcite{Lipton1989}}
   \footnotetext[3]{\fullcite{Butz2013}}
 \end{frame}
-\begin{frame}[c]{Computational modelling:\ MSP II}
+\begin{frame}[c]{Computational modelling:\ MSP:\ turnover}
+  \note[item]{A stable fixed point where nothing occurs. If activity is less, sprouting, if more, retraction, but if very less, retraction}.
+  \note[item]{Note that they applied the same for excitatory and inhibitory post-synaptic elements}
+  \note[item]{And, the same for all neurons: excitatory and inhibitory.}
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
@@ -186,13 +198,58 @@
     \end{column}
   \end{columns}
 \end{frame}
-\begin{frame}[c]{Computational modelling II}
+\begin{frame}[c]{Computational modelling II:\ Butz2013 replication}
   \centering
-  \includegraphics[width=0.7\textwidth]{99_images/butz3.png}
-  \footnotetext[2]{\fullcite{Butz2013}}
+  \includegraphics[width=0.9\textwidth]{99_images/butz3.png}
+  \note[item]{They replicated the peripheral lesion study, as you see.}
+  \note[item]{You have repair from the outside in, and you have ingrowth of excitatory axons.}
 \end{frame}
-
-\section{Methods}
+\begin{frame}[c]{Computational modelling II:\ Butz2013 results}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}[h]
+        \input{99_images/growth-curves-den-butz.tex}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.9\textwidth]{99_images/growth-curve-general.png}%chktex 8
+    \end{column}
+  \end{columns}
+  \note[item]{They suggested that post-synaptic elements should form at a lower activity level than pre-synaptic elements}
+  \note[item]{They used an arbitrary homeostatic point, for all neurons}
+  \note[item]{No discussion of inhibitory circuit here.}
+  \note[item]{No discussion of biological realism of the model either.}
+\end{frame}
+\section{Methods: our approach}
+\begin{frame}[c]{Start with a biologically realistic network model}
+  \begin{figure}[h]
+    \def\svgwidth{0.7\textwidth}
+    \input{99_images/schematic.tex}
+  \end{figure}
+  \note[item]{We decided to start with a biologically realistic model: a cortical model proposed by Vogels et al.}
+  \note[item]{This includes realistic conductances, for example.}
+  \note[item]{This model is balanced by homeostatic inhibitory synaptic plasticity, and exhibits AI characteristics similar to cortical networks}
+  \note[item]{This model does not have any spatial information incorporated it, but to model the LPZ and spatial analysis we do need it.}
+  \footnotetext[4]{\fullcite{Vogels2011}}
+\end{frame}
+\begin{frame}[c]{Extensions}
+  \note[item]{A few of these were made while incorporating spatial information in the model, keeping in mind that we want' to keep the model as realistica as we can manage.}
+  \begin{itemize}
+    \item Probabilistic formation of synapses, also: \enquote{longer} inhibitory than excitatory connections\footnotemark{}.
+    \item Probabilistic deletion of synapses (incorporating evidence that stronger synapses have less likelihood of removal\footnotemark{}).
+    \item Further generalisation of growth curves.
+  \end{itemize}
+  \footnotetext[5]{Citation buried in my lab logs somewhere!}
+  \footnotetext[6]{\fullcite{Knott2006}}
+\end{frame}
+\begin{frame}[c]{Simulation protocol}
+  \begin{figure}[h]
+    \centering
+    \input{99_images/simulation-stages.tex}
+  \end{figure}
+  \note[item]{Explain the simulation protocol.}
+\end{frame}
 \section{Results and discussion}
 \end{document}
 
